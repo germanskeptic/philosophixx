@@ -1,0 +1,552 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melancholic Elegance</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #2a3b4f; /* Very dark desaturated blue */
+            color: #adb5bd; /* Light grey for main text */
+            font-family: 'Lora', serif;
+            font-weight: 400; /* Default weight for Lora */
+            margin: 0;
+            padding: 0;
+            line-height: 1.7; /* Increased for Lora */
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 25px; /* Increased padding */
+        }
+
+        main > section { /* Consistent vertical padding for sections */
+            padding-top: 60px;
+            padding-bottom: 60px;
+        }
+        main > section:first-child { /* Adjust for hero if hero is not a <section> or if specific spacing is needed */
+            padding-top: 40px; /* Example: Less top padding if following hero closely */
+        }
+         main > section#poems { /* Specific adjustment for the first actual content section after hero */
+            padding-top: 40px;
+        }
+
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Merriweather', serif;
+            color: #c0c0c0; /* Slightly lighter grey for headings */
+            margin-bottom: 0.5em;
+            font-weight: 300; /* Lighter weight for headings */
+            letter-spacing: 0.5px; /* Subtle letter spacing */
+        }
+
+        p {
+            margin-bottom: 1em;
+            letter-spacing: 0.2px; /* Slight spacing for readability */
+        }
+
+        a {
+            color: #8f9ba7; /* Subtly different shade for links */
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #adb5bd; /* Light grey on hover */
+            text-decoration: underline;
+        }
+
+        /* Navigation */
+        .nav {
+            background-color: #304055; /* Slightly lighter than body */
+            padding: 25px 0; /* Increased padding */
+            border-bottom: 1px solid rgba(106, 94, 122, 0.5); /* More subtle border */
+            text-align: center;
+        }
+
+        .nav a {
+            color: #c0c0c0;
+            margin: 0 15px;
+            font-size: 1.1em;
+            font-weight: 400; /* Ensure nav links are not too thin */
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.5s ease-in-out; /* Slower color transition */
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px; /* Position slightly below text */
+            left: 0;
+            width: 0; /* Initially no width */
+            height: 1px; /* Thin line */
+            background-color: #8f9ba7; /* Link color */
+            transition: width 0.6s ease-in-out; /* Slow width animation */
+        }
+
+        .nav a:hover::after {
+            width: 100%; /* Full width on hover */
+        }
+
+        .nav a:hover {
+            color: #adb5bd;
+        }
+
+
+        /* Hero Section */
+        .hero {
+            background-color: #2a3b4f; /* Same as body or slightly different dark shade */
+            padding: 60px 20px; /* Padding remains generous */
+            text-align: center;
+            border-bottom: 1px solid rgba(125, 108, 98, 0.5); /* More subtle border */
+            overflow: hidden; /* Contain animations */
+        }
+
+        .hero h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 3em; /* Slightly larger */
+            color: #c0c0c0;
+            margin-bottom: 0.2em;
+            font-weight: 300; /* Lighter weight for hero heading */
+            letter-spacing: 1px; /* More spacing for hero heading */
+            font-style: italic; /* As per stylistic suggestion */
+            opacity: 0; /* Initial state for animation */
+            animation: fadeInUp 1.5s ease-in-out 0.4s forwards;
+        }
+
+        .hero p {
+            font-size: 1.25em; /* Slightly larger */
+            color: #adb5bd;
+            line-height: 1.8;
+            letter-spacing: 0.3px;
+            opacity: 0; /* Initial state for animation */
+            animation: fadeInUp 1.5s ease-in-out 0.8s forwards;
+        }
+
+        /* Section Title */
+        .section-title {
+            font-family: 'Merriweather', serif;
+            text-align: center;
+            margin-top: 0; /* Adjusted as section now has padding */
+            margin-bottom: 40px; /* Increased bottom margin */
+            font-size: 2.2em; /* Slightly larger */
+            color: #c0c0c0; /* Light grey */
+            font-weight: 400; /* Normal weight for section titles */
+            letter-spacing: 0.8px;
+            font-style: italic; /* As per stylistic suggestion */
+        }
+
+        /* Cards */
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 35px; /* Increased gap */
+            justify-content: center;
+            max-width: 1200px; /* Max width for card container */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .text-card, .poem-card {
+            background-color: #354659; /* Shade of dark grey, distinct from body */
+            padding: 35px; /* Increased padding */
+            border: 1px solid rgba(106, 94, 122, 0.4); /* More subtle border */
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* Softer shadow */
+            width: calc(50% - 35px); /* Adjust for new gap, ensures two cards fit */
+            min-width: 280px; /* Min width remains */
+            box-sizing: border-box;
+            transition: transform 0.7s ease-in-out, box-shadow 0.7s ease-in-out, background-color 0.7s ease-in-out;
+        }
+
+        .text-card:hover {
+            transform: translateY(-8px); /* Subtle lift */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Softer hover shadow */
+        }
+        
+        .poem-card:hover {
+            transform: scale(1.02); /* Very subtle scale */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18); /* Softer hover shadow */
+        }
+
+        /* Adding ::before sweep to text-card specifically */
+        .text-card {
+            position: relative;
+            overflow: hidden; /* To contain the ::before pseudo-element */
+        }
+
+        .text-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -110%; /* Start off-screen to the left */
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.02), transparent);
+            transition: left 1s ease-in-out; /* Slower sweep */
+            z-index: 0; /* Ensure it's behind content if needed, though content is not directly interactive */
+        }
+
+        .text-card:hover::before {
+            left: 110%; /* Sweep across to the right */
+        }
+
+
+        .text-card h3, .poem-card h3 {
+            font-family: 'Merriweather', serif;
+            position: relative; /* Ensure text is above sweep */
+            z-index: 1;
+            color: #c0c0c0; /* Lighter grey for card titles */
+            margin-top: 0;
+            font-size: 1.5em;
+            font-weight: 400; /* Normal weight for card titles */
+            letter-spacing: 0.4px;
+            font-style: italic; /* As per stylistic suggestion */
+        }
+
+        .text-card p, .poem-card p {
+            color: #adb5bd; /* Light grey for card text */
+            line-height: 1.7;
+            letter-spacing: 0.2px;
+        }
+
+        .poem-card pre { /* Poem text */
+            white-space: pre-wrap;
+            font-family: 'Lora', serif; /* Consistent with body */
+            font-style: italic; /* As per stylistic suggestion */
+            line-height: 1.8;
+            font-size: 1.05em; /* Slightly larger for poetic emphasis */
+            color: #adb5bd;
+            letter-spacing: 0.3px;
+        }
+        
+        .meta-text { /* Excerpt and meta */
+            font-size: 0.85em; /* Slightly smaller */
+            color: #8f9ba7; /* Muted accent for meta text */
+            font-style: italic;
+            letter-spacing: 0.4px;
+            line-height: 1.6;
+        }
+
+        /* Buttons */
+        .btn, .add-btn, .submit-btn {
+            background-color: #6a5e7a; /* Dusty purple */
+            color: #c0c0c0; /* Light grey text */
+            font-family: 'Lora', serif; /* Consistent font */
+            padding: 12px 28px; /* Increased padding */
+            border: 1px solid #50485e; /* Darker shade of purple for border */
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500; /* Slightly more weight */
+            letter-spacing: 0.5px;
+            font-style: italic; /* As per stylistic suggestion */
+            transition: background-color 0.6s ease-in-out, box-shadow 0.6s ease-in-out, color 0.6s ease-in-out; /* Slower transition */
+        }
+
+        .btn:hover, .add-btn:hover, .submit-btn:hover {
+            background-color: #50485e; /* Darker purple on hover */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25); /* Softer hover shadow */
+            color: #d1d1d1; /* Slightly lighter text on hover */
+        }
+
+        /* Forms */
+        .qa-form, .contact-form {
+            background-color: #354659; /* Shade of dark grey */
+            padding: 35px; /* Increased padding */
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Very subtle shadow for static forms */
+            margin-top: 30px;
+        }
+
+        .qa-form label, .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            color: #c0c0c0; /* Lighter grey for labels */
+            font-weight: 400;
+            letter-spacing: 0.3px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: calc(100% - 22px); /* Account for padding and border */
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(125, 108, 98, 0.4); /* More subtle border */
+            border-radius: 4px;
+            background-color: #2a3b4f; /* Very dark desaturated blue */
+            color: #adb5bd; /* Light grey text */
+            font-family: 'Lora', serif; /* Consistent font */
+            font-size: 1em;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #8f9ba7; /* Muted accent on focus */
+            box-shadow: 0 0 8px rgba(143, 155, 167, 0.2); /* Softer glow */
+        }
+
+        /* QA Item */
+        .qa-item {
+            background-color: #304055; /* Slightly lighter than body */
+            padding: 25px; /* Increased padding */
+            margin-bottom: 20px; /* Increased margin */
+            border-radius: 5px;
+            border-left: 3px solid rgba(106, 94, 122, 0.6); /* Slightly stronger accent border */
+        }
+
+        .qa-item h4 { /* Question */
+            font-family: 'Merriweather', serif;
+            color: #c0c0c0;
+            margin-top: 0;
+            font-weight: 700; /* Bolder for questions */
+            font-style: italic; /* As per stylistic suggestion */
+            letter-spacing: 0.4px;
+            font-size: 1.1em;
+        }
+        .qa-item p { /* Answer */
+            color: #adb5bd;
+            margin-bottom: 0;
+            line-height: 1.7;
+            letter-spacing: 0.2px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 0; /* Increased padding */
+            margin-top: 60px; /* Increased margin */
+            border-top: 1px solid rgba(125, 108, 98, 0.5); /* More subtle border */
+            font-size: 0.9em;
+            color: #8f9ba7;
+            letter-spacing: 0.3px;
+        }
+
+        /* Logo - assuming .hero h1 can serve as a logo if no specific .logo class exists */
+        /* If there was a specific .logo class, it would be styled like:
+        .logo {
+            font-family: 'Merriweather', serif; (or a more distinct display font)
+            font-style: italic;
+            font-weight: 300; (or specific artistic weight)
+            font-size: 2.5em; (adjust as needed)
+            color: #c0c0c0;
+            letter-spacing: 1px;
+        }
+        */
+
+        /* Keyframes for Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Scroll Reveal Base Styles */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px); /* Start slightly lower */
+            transition: opacity 1s ease-in-out, transform 1.2s ease-in-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <div class="container">
+            <a href="#home">Home</a>
+            <a href="#poems">Poems</a>
+            <a href="#thoughts">Thoughts</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <h1>Whispers of the Dusk</h1>
+            <p>A collection of fleeting moments and quiet contemplations.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="poems">
+            <h2 class="section-title reveal">Poetic Fragments</h2>
+            <div class="card-container">
+                <article class="poem-card reveal">
+                    <h3>Echoes in the Void</h3>
+                    <pre class="poem-text">
+The shadows lengthen,
+A sigh escapes the stillness,
+World fades to grey.
+                    </pre>
+                    <p class="meta-text">Composed in twilight</p>
+                </article>
+                <article class="poem-card">
+                    <h3>Faded Ink</h3>
+                    <pre class="poem-text">
+Words on a page,
+Like ghosts of thoughts once vivid,
+Now softened by time.
+                    </pre>
+                    <p class="meta-text">From an old journal</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="thoughts">
+            <h2 class="section-title reveal">Fleeting Thoughts</h2>
+            <div class="card-container">
+                <article class="text-card reveal">
+                    <h3>The Allure of Silence</h3>
+                    <p class="excerpt">In silence, the mind finds space to wander through melancholic landscapes, finding a strange comfort in the quietude. It's a retreat from the noise, a return to the self.</p>
+                    <p class="meta-text">Musings at midnight</p>
+                </article>
+                <article class="text-card reveal">
+                    <h3>Elegance in Imperfection</h3>
+                    <p class="excerpt">There's a certain elegance in things that are not perfectly new, in the faded colors of an old tapestry, or the worn pages of a beloved book. It speaks of history, of a life lived.</p>
+                    <p class="meta-text">Reflections on aesthetics</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="qa">
+            <h2 class="section-title reveal">Questions & Answers</h2>
+            <div class="qa-item reveal">
+                <h4 class="qa-question">What inspires this mood?</h4>
+                <p class="qa-answer">The quiet hours of dusk and dawn, the introspection found in solitude, and the beauty of things that are subtly aged or worn.</p>
+            </div>
+            <div class="qa-item reveal">
+                <h4 class="qa-question">Why these colors?</h4>
+                <p class="qa-answer">The dark, muted palette aims to create a sense of calm and introspection, avoiding harsh contrasts for a softer, more melancholic visual experience.</p>
+            </div>
+            
+            <form class="qa-form reveal">
+                <h3>Ask a Question</h3> {/* This h3 will inherit Merriweather, 300 weight */}
+                <div>
+                    <label for="question">Your Question:</label>
+                    <textarea id="question" name="question" rows="4" placeholder="Type your question here..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Submit Question</button>
+            </form>
+        </section>
+
+        <section id="contact">
+            <h2 class="section-title reveal">Reach Out</h2>
+            <form class="contact-form reveal">
+                <div>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Your Name">
+                </div>
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" name="email" placeholder="Your Email">
+                </div>
+                <div>
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="5" placeholder="Your thoughts..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </section>
+        
+        <div style="text-align: center; margin-top: 40px;">
+             <button class="add-btn">A Muted Action</button>
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2023 Whispers of the Dusk. All rights reserved in the shadows.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const revealElements = document.querySelectorAll('.reveal');
+            const cardContainers = document.querySelectorAll('.card-container');
+
+            function doReveal() { // Renamed to avoid conflict with window.reveal if it exists
+                const windowHeight = window.innerHeight;
+                const elementVisibleThreshold = 80; // Pixels from bottom to trigger
+
+                // Handle general .reveal elements (not in card containers or handled differently)
+                revealElements.forEach(element => {
+                    // Ensure not to double-process elements that are children of a card-container
+                    // if (element.closest('.card-container')) return; 
+
+                    const elementTop = element.getBoundingClientRect().top;
+                    if (elementTop < windowHeight - elementVisibleThreshold) {
+                        if (!element.classList.contains('active')) {
+                            const dataDelay = parseFloat(element.dataset.revealDelay);
+                            if (!isNaN(dataDelay)) {
+                                element.style.transitionDelay = `${dataDelay}s`;
+                            }
+                            element.classList.add('active');
+                        }
+                    } else {
+                        // Optional: remove active class to re-trigger animation if scrolling up and out of view
+                        // if (element.classList.contains('active')) { // only if you want re-triggering
+                        //    element.classList.remove('active');
+                        //    element.style.transitionDelay = ''; 
+                        // }
+                    }
+                });
+
+                // Handle staggered reveal for cards within each .card-container
+                cardContainers.forEach(container => {
+                    const cardsInContainer = container.querySelectorAll('.reveal'); // Get .reveal children of this container
+                    let delay = 0; // Reset delay for each container
+                    
+                    cardsInContainer.forEach(card => {
+                        const cardTop = card.getBoundingClientRect().top;
+                        if (cardTop < windowHeight - elementVisibleThreshold) {
+                            if (!card.classList.contains('active')) {
+                                const dataDelay = parseFloat(card.dataset.revealDelay);
+                                const currentDelay = !isNaN(dataDelay) ? dataDelay : delay;
+                                
+                                card.style.transitionDelay = `${currentDelay}s`;
+                                card.classList.add('active');
+                                
+                                if (isNaN(dataDelay)) { // Only increment master container delay if not using a fixed data-attribute delay
+                                    delay += 0.2s; // Stagger amount for next card in this container (reduced for subtlety)
+                                }
+                            }
+                        } else {
+                            // Optional: Reset if scrolled out of view from top for re-triggering
+                            // if (card.classList.contains('active')) { // only if you want re-triggering
+                            //    card.classList.remove('active');
+                            //    card.style.transitionDelay = '';
+                            // }
+                        }
+                    });
+                });
+            }
+
+            // Initial check
+            doReveal();
+            // Listen for scroll events
+            window.addEventListener('scroll', doReveal);
+        });
+    </script>
+</body>
+</html>
